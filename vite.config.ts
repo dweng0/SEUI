@@ -11,6 +11,7 @@ export default defineConfig({
         // devtools(),
         solidPlugin(),
     ],
+    base: '/SEUI',
     server: {
         port: 3000,
     },
