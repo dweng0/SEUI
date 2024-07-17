@@ -1,0 +1,57 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid #d3d3d3;
+    margin: 4px 0;
+    padding-bottom: 8px;
+}
+
+.console {
+    position: fixed;
+    bottom: -14px;
+    background: white;
+    border: 1px solid black;
+    width: 100%;
+    left: 0px;
+    height: 300px;
+    overflow-y: auto;
+    z-index: 9999;
+}
+
+.badge {
+    border: 1px solid #111;
+    background-color: #e6f0f4;
+    width: 125px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.address {
+    font-weight: 500;
+}
+
+.balancewrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.balanceitem {
+    display: flex;
+    gap: 4px;
+}
+.balancevalue {
+    color: #4f4e4e;
+}
+.connectedwrapper {
+    display: flex;
+    gap: 12px;
+}
+.disconnect {
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 12px;
+}

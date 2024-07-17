@@ -1,0 +1,22 @@
+.wrapper { 
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper:hover {
+    background-color: #f5f5f5;
+}
+
+.active { 
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.price { 
+    font-size: 1.05rem;
+}

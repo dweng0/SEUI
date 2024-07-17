@@ -1,0 +1,64 @@
+body { 
+  max-width: clamp(320px, 97%, 2160px);  
+  margin: auto;
+  font-size: 0.80rem;
+  line-height: 1.5;
+  font-family: "PT Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.column { 
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 75px);  
+  flex: 0 1 auto; 
+  min-width: 75px;
+}
+
+.trade {
+  min-width: 300px;
+}
+
+.chart { 
+  padding: 0 8px;
+}
+
+.expand {
+  flex: 1;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.imageicon { 
+  width: 24px;
+  height: 24px;
+  filter: opacity(0.6)
+}
+
+.loading {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,55 @@
+.price {  
+	position: absolute;
+	top: 50%;
+	height: 100%;
+	/* Adjust the height of the bar as needed */
+	transform: translateY(-50%);	
+	z-index: 1;
+	opacity: 0.25;
+}
+
+.rowcontent { 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+
+}
+
+.row { 
+    display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+    /**handle animation for bavkgrouund*/
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.row:hover{
+    background-color: #f0f0f0;
+}
+
+.price.bids {
+	background-color: #3fb618;
+}
+
+.price.asks {
+	background-color: tomato;
+}
+
+.pricevalue { 
+    font-weight: bold;
+}
+.pricevalue.bids {
+    color: #37a014;
+}
+
+.pricevalue.asks {
+    color: rgb(247, 79, 49);
+}
+
+.amountvalue { 
+    color: #4f4e4e;
+}

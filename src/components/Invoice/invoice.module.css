@@ -1,0 +1,34 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.receiptsection { 
+    border: 1px solid #d3d3d3;
+    padding: 8px;
+    margin-top: 8px;
+}
+
+.receiptitem { 
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.valueitem { 
+    font-size: 14px;
+}
+
+.orderbutton { 
+    cursor: pointer;
+    border: 1px solid #c80700;
+    background-color: #f4e6e6;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.orderbutton:hover { 
+    background-color: #e0a8a8;
+}

@@ -1,0 +1,116 @@
+.connectPrompt {
+    text-align: center;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 20px;
+}
+
+.connectPrompt p {
+    margin-bottom: 10px;
+}
+
+.connectPrompt button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.connectPrompt button:hover {
+    background: #0056b3;
+}
+
+.tabwrapper {
+    display: flex;
+    border-bottom: 1px solid #f5f5f5
+}
+
+.tabwrapper span {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.tabwrapper span:hover {
+    background: #ddd;
+}
+
+.tabwrapper .active {
+    background: #f5f5f5;
+    
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 0;
+}
+
+li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 14.5px;
+}
+
+
+.notrades {
+    text-align: center;
+}
+.orderrow {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    align-items: center;
+}
+.orderrowsubitem { 
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+.orderrowsubitem > h3 { 
+    margin: 0px;
+    color: #4f4e4e;
+}
+.subtitle { 
+    color: #606367;
+    font-size: 12px;
+}
+
+.submit { 
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+    font-size: 12px;
+}
+
+.submit:hover {
+    background: #0056b3;
+}
+
+.bookside { 
+    background-color: #e9e8e8;
+    padding: 6px;
+    margin-right: 4px;
+    border-radius: 4px;
+}
+
+
+.rowbuttons { 
+    display: flex;
+    gap: 12px;
+}
+
+.rowbutton { 
+    cursor: pointer;
+    transition: all 0.2s;
+}

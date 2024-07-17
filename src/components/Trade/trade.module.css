@@ -1,0 +1,113 @@
+
+/* Reset default input styles */
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+/* Custom styles for input boxes */
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin: 0px;
+    margin-top: 8px;
+    margin-bottom: 8px;    
+}
+
+/* Custom styles for disabled input boxes */
+input:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+input[type=checkbox] {
+    position: relative;
+      border: 2px solid #d3d3d3;
+      border-radius: 2px;
+      background: none;
+      cursor: pointer;
+      line-height: 0;
+      margin: 0 .6em 0 0;
+      outline: 0;
+      padding: 0 !important;
+      vertical-align: text-top;
+      height: 20px;
+      width: 20px;
+      -webkit-appearance: none;
+    opacity: .5;
+  }
+  
+  input[type=checkbox]:hover {
+    opacity: 1;
+  }
+  
+  input[type=checkbox]:checked {
+    background-color: #4db72bbd;
+    border: 2px solid #4db72bbd;
+    opacity: 1;
+  }
+  
+  input[type=checkbox]:before {
+    content: '';
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    width: 4px;
+    height: 10px;
+    border: solid #FFF;
+    border-width: 0 2px 2px 0;
+    margin: -1px -1px 0 -1px;
+    transform: rotate(45deg) translate(-50%, -50%);
+    z-index: 2;
+  }
+.wrapper { 
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 10px 0;
+    background: white;
+    border-top: 1px solid #d3d3d3;    
+    margin: 0 auto;
+}
+
+.submit { 
+    padding: 12px;
+    margin-top: 12px;
+    background: #4db72bbd;
+    color: white;
+    border: 0px;
+    border-radius: 4px;
+}
+.side { 
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+}
+
+.sideitem { 
+    width: 45%;
+    border: 1px solid #d3d3d3;
+    border-radius: 4px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sideitem:hover { 
+    background: #f0f0f0;
+    cursor: pointer;
+}
+
+.sideitem.active { 
+    border: 1px solid #006ec8;
+    background-color: #e6f0f4;
+}

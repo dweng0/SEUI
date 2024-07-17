@@ -1,0 +1,9 @@
+.subtitle { 
+    display: flex;
+    justify-content: space-between;    
+    margin-bottom: 10px;
+    font-size: 12px;    
+    color: #333;
+    border-bottom: 1px solid #d3d3d3
+
+}
