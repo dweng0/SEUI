@@ -6,14 +6,34 @@ import { useNetwork } from '../../context/Network'
 import Big from 'big.js'
 import { DepthPoint } from '../../context/interface'
 import styles from './orderbook.module.css'
+
 const depth_size = 10
 const tick_size = 2
+
+/**
+ * Map a DepthPoint to an object with Big.js instances for price and amount.
+ *
+ * @param {DepthPoint} bid - The bid depth point.
+ * @returns {{ price: Big, amount: Big }} The mapped object with Big.js instances.
+ */
 const mapToBig = (bid: DepthPoint) => {
     return {
         price: Big(bid.price),
         amount: Big(bid.amount),
     }
 }
+
+/**
+ * The OrderBook component.
+ *
+ * This component displays the order book, showing the top bids and asks with their prices and amounts.
+ *
+ * @component
+ * @example
+ * <OrderBook />
+ *
+ * @returns {JSX.Element} The rendered OrderBook component.
+ */
 const OrderBook: Component = () => {
     const { currentPairDepth } = useNetwork()
 
@@ -82,3 +102,4 @@ const OrderBook: Component = () => {
 }
 
 export default OrderBook
+

@@ -5,12 +5,30 @@ import SignerButton from '../SignerButton'
 import styles from './invoice.module.css'
 import { rootAddress } from '../../context/Network/index'
 import { useErrorHandler } from '../../context/Error'
+
+/**
+ * The Invoice component.
+ *
+ * This component displays an invoice for the current order, providing details such as order number,
+ * pair, price, and timestamp. It also allows the user to cancel the order if necessary.
+ *
+ * @component
+ * @example
+ * <Invoice />
+ *
+ * @returns {JSX.Element} The rendered Invoice component.
+ */
 const Invoice: Component = () => {
     const { docket, setDocket } = useTrading()
     const { address, apiKey } = useSignature()
     const { setAppActivityLog, setError, setLevel } = useErrorHandler()
     const [statusMessage, setStatusMessage] = createSignal('Cancel')
 
+    /**
+     * Handle order cancellation.
+     *
+     * This function sends a DELETE request to cancel the current order.
+     */
     const handleCancel = async () => {
         setStatusMessage('Cancelling...')
         const url = `${rootAddress}/orders/${docket()?.order_id}`
@@ -39,6 +57,7 @@ const Invoice: Component = () => {
             setStatusMessage('Cancel')
         }
     }
+
     return (
         <>
             {!address() ? (

@@ -1,9 +1,17 @@
 import { Component } from 'solid-js'
-
 import styles from './bookrow.module.css'
 import Big from 'big.js'
 import { useTrading } from '../../context/Trading'
 
+/**
+ * Properties for the OrderBookRow component.
+ *
+ * @typedef {Object} OrderBookRowProps
+ * @property {string} position - The position of the order ('left' or 'right').
+ * @property {string} price - The price of the order.
+ * @property {string} amount - The amount of the order.
+ * @property {number} maxAmount - The maximum amount for scaling the bar width.
+ */
 interface OrderBookRowProps {
     position: string
     price: string
@@ -11,6 +19,19 @@ interface OrderBookRowProps {
     maxAmount: number
 }
 
+/**
+ * The OrderBookRow component.
+ *
+ * This component represents a row in the order book, displaying the price and amount,
+ * and handling clicks to set limit orders.
+ *
+ * @component
+ * @example
+ * <OrderBookRow position="left" price="100.00" amount="1.5" maxAmount={10} />
+ *
+ * @param {OrderBookRowProps} props - The properties for the component.
+ * @returns {JSX.Element} The rendered OrderBookRow component.
+ */
 const OrderBookRow: Component<OrderBookRowProps> = ({
     position,
     price,

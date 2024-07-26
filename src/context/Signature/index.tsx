@@ -6,6 +6,16 @@ import {
     createEffect,
 } from 'solid-js'
 
+/**
+ * Interface representing the Signature Context type.
+ *
+ * @typedef {Object} SignatureContextType
+ * @property {() => string} address - Function to get the current address.
+ * @property {(value: string) => void} setAddress - Function to set a new address.
+ * @property {() => string} apiKey - Function to get the current API key.
+ * @property {(value: string) => void} setApiKey - Function to set a new API key.
+ * @property {() => void} disconnect - Function to disconnect and clear stored data.
+ */
 interface SignatureContextType {
     address: () => string
     setAddress: (value: string) => void
@@ -19,11 +29,26 @@ const SignatureContext = createContext<SignatureContextType | undefined>(
     undefined
 )
 
+/**
+ * The SignatureProvider component.
+ *
+ * This component provides signature-related context to its children components,
+ * including managing the address and API key, and handling disconnects.
+ *
+ * @component
+ * @example
+ * <SignatureProvider>
+ *   <YourComponent />
+ * </SignatureProvider>
+ *
+ * @param {Object} props - The properties for the component.
+ * @returns {JSX.Element} The rendered SignatureProvider component.
+ */
 export const SignatureProvider: ParentComponent = (props) => {
     const [address, setAddress] = createSignal<string>('')
     const [apiKey, setApiKey] = createSignal<string>('')
 
-    //read from local storage
+    // Read from local storage
     createEffect(() => {
         const address = localStorage.getItem('address')
         const apiKey = localStorage.getItem('apiKey')
@@ -35,7 +60,7 @@ export const SignatureProvider: ParentComponent = (props) => {
         }
     })
 
-    //write to local storage
+    // Write to local storage
     createEffect(() => {
         if (address() && apiKey()) {
             localStorage.setItem('address', address())
@@ -43,11 +68,14 @@ export const SignatureProvider: ParentComponent = (props) => {
         }
     })
 
+    /**
+     * Disconnect and clear stored data.
+     */
     const disconnect = () => {
         setAddress('')
         setApiKey('')
 
-        //clear local storage
+        // Clear local storage
         localStorage.removeItem('address')
         localStorage.removeItem('apiKey')
     }
@@ -67,6 +95,12 @@ export const SignatureProvider: ParentComponent = (props) => {
     )
 }
 
+/**
+ * Custom hook to use the SignatureContext.
+ *
+ * @throws Will throw an error if used outside of a SignatureProvider.
+ * @returns {SignatureContextType} The signature context value.
+ */
 export const useSignature = (): SignatureContextType => {
     const context = useContext(SignatureContext)
     if (!context) {
@@ -74,3 +108,4 @@ export const useSignature = (): SignatureContextType => {
     }
     return context
 }
+

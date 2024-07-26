@@ -4,6 +4,18 @@ import { useErrorHandler } from '../../context/Error'
 import styles from './signerbutton.module.css'
 import { walletService } from '../../service/walletservice'
 
+/**
+ * The SignerButton component.
+ *
+ * This component handles the wallet connection and manual address/API key submission.
+ * It provides the UI for connecting a wallet or manually entering the address and API key.
+ *
+ * @component
+ * @example
+ * <SignerButton />
+ *
+ * @returns {JSX.Element} The rendered SignerButton component.
+ */
 const SignerButton: Component = () => {
     const {
         address: walletAddress,
@@ -16,16 +28,32 @@ const SignerButton: Component = () => {
     const [manualAddress, setManualAddress] = createSignal('')
     const [manualApiKey, setManualApiKey] = createSignal('')
     const [enterManually, setEnterManually] = createSignal(false)
+
+    /**
+     * Handle the click event for connecting the wallet.
+     */
     const handleClick = async () => {
         setLoading(true)
         connectWallet()
     }
 
+    /**
+     * Handle manual submission of address and API key.
+     *
+     * @param {string} address - The manual address input.
+     * @param {string} apiKey - The manual API key input.
+     */
     const manualSubmission = (address: string, apiKey: string) => {
         setApiKey(apiKey)
         setAddress(address)
     }
 
+    /**
+     * Update the API key using the provided signature and message.
+     *
+     * @param {string} signature - The signature from the wallet.
+     * @param {string} message - The message to be signed.
+     */
     const updateApiKey = async (signature: string, message: string) => {
         try {
             setAppActivityLog('Signature and message')
@@ -63,11 +91,12 @@ const SignerButton: Component = () => {
         if (walletAddress() && walletAddress() !== '0x') {
             setAddress(walletAddress())
 
-            //now sign the message
+            // Now sign the message
             const { signature, message } = await signMessage()
             updateApiKey(signature, message)
         }
     })
+
     return (
         <>
             {!enterManually() && walletAddress() === '0x' && (
@@ -125,3 +154,4 @@ const SignerButton: Component = () => {
 }
 
 export default SignerButton
+
