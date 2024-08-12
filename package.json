@@ -24,6 +24,7 @@
         "@web3-onboard/injected-wallets": "^2.11.1",
         "big.js": "^6.2.1",
         "ethers": "^5.7.2",
+        "jsdocs": "^1.0.0",
         "lightweight-charts": "^4.1.6",
         "solid-js": "^1.8.11",
         "viem": "^2.17.3"
