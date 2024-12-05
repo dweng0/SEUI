@@ -7,6 +7,12 @@ import { useTrading } from '../../context/Trading'
 import { Balance } from '../../context/interface'
 import Big from 'big.js'
 
+/**
+ * Shortens an Ethereum address for display.
+ *
+ * @param {string} address - The Ethereum address to shorten.
+ * @returns {string} The shortened address.
+ */
 const clipAddress = (address: string) => {
     if (!address) return ''
     return `${address.substring(0, 4)}...${address.substring(
@@ -14,6 +20,17 @@ const clipAddress = (address: string) => {
     )}`
 }
 
+/**
+ * The StatusBar component.
+ *
+ * This component displays the status of the connection, balances, and handles user interactions such as disconnecting.
+ *
+ * @component
+ * @example
+ * <StatusBar />
+ *
+ * @returns {JSX.Element} The rendered StatusBar component.
+ */
 const StatusBar: Component = () => {
     const { address, apiKey, disconnect } = useSignature()
     const { error, level, appActivityLog } = useErrorHandler()
@@ -24,6 +41,11 @@ const StatusBar: Component = () => {
 
     const [status, setStatus] = createSignal('Updating...')
 
+    /**
+     * Determine the current status based on error, level, and connection state.
+     *
+     * @returns {string} The current status.
+     */
     const getStatus = () => {
         if (error()) {
             return 'Error'
@@ -37,6 +59,12 @@ const StatusBar: Component = () => {
         return 'Not Connected' // Ensure a default return value
     }
 
+    /**
+     * Format the balance for display.
+     *
+     * @param {Balance} balance - The balance object.
+     * @returns {JSX.Element} The formatted balance item.
+     */
     const returnBalance = (balance: Balance) => {
         return (
             <div class={styles.balanceitem}>
@@ -84,3 +112,4 @@ const StatusBar: Component = () => {
 }
 
 export default StatusBar
+

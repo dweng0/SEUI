@@ -3,6 +3,18 @@ import Chart from '../Chart'
 import { useNetwork } from '../../context/Network'
 import { LineData } from 'lightweight-charts'
 
+/**
+ * The ChartWrapper component.
+ *
+ * This component fetches chart data from the network context and processes it to be displayed
+ * in the Chart component. It ensures that the chart data is unique and sorted by time.
+ *
+ * @component
+ * @example
+ * <ChartWrapper />
+ *
+ * @returns {JSX.Element} The rendered ChartWrapper component.
+ */
 const ChartWrapper: Component = () => {
     const { charts, chartsLoading, activePair } = useNetwork()
     const [plots, setPlots] = createSignal<LineData[]>([])
@@ -25,7 +37,7 @@ const ChartWrapper: Component = () => {
                 selectedChart.flat() as unknown as any
 
             // Use a Map to remove duplicates based on the time field
-            const uniquePlotsMap = new Map()
+            const uniquePlotsMap = new Map<number, LineData>()
             flattenedSelectedChart.forEach((plot) => {
                 if (!uniquePlotsMap.has(plot.time)) {
                     uniquePlotsMap.set(plot.time, plot)

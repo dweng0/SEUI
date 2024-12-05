@@ -10,11 +10,29 @@ import OrderRow from './tradeitem'
 
 const { imageicon } = appstyles
 
+/**
+ * Function to filter orders by status.
+ *
+ * @param {OrderStatus} status - The status to filter orders by.
+ * @returns {Function} A function that filters orders by the given status.
+ */
 const byStatus = (status: OrderStatus) => (order: Order) =>
     order.status === status
 
 type AllOrderStatus = OrderStatus | 'all'
 
+/**
+ * The TradeTable component.
+ *
+ * This component displays a table of trade orders categorized by their status.
+ * It fetches the list of orders and allows users to filter them by status.
+ *
+ * @component
+ * @example
+ * <TradeTable />
+ *
+ * @returns {JSX.Element} The rendered TradeTable component.
+ */
 const TradeTable: Component = () => {
     const { apiKey } = useSignature()
     const [activeTab, setActiveTab] = createSignal<AllOrderStatus>('all')
@@ -40,7 +58,7 @@ const TradeTable: Component = () => {
 
     createEffect(() => {
         if (loading()) {
-            //todo something to inform user table is loading
+            // TODO: Add user notification for loading state
         }
     })
 
@@ -148,10 +166,29 @@ const TradeTable: Component = () => {
     )
 }
 
-interface OrderListPropts {
+/**
+ * Properties for the OrderList component.
+ *
+ * @typedef {Object} OrderListProps
+ * @property {Order[]} orders - The list of orders to display.
+ */
+interface OrderListProps {
     orders: Order[]
 }
-const OrderList: Component<OrderListPropts> = ({ orders }) => {
+
+/**
+ * The OrderList component.
+ *
+ * This component displays a list of orders. If no orders are found, it displays a message.
+ *
+ * @component
+ * @example
+ * <OrderList orders={[]} />
+ *
+ * @param {OrderListProps} props - The properties for the component.
+ * @returns {JSX.Element} The rendered OrderList component.
+ */
+const OrderList: Component<OrderListProps> = ({ orders }) => {
     return (
         <div>
             {orders.length === 0 ? (
@@ -168,3 +205,4 @@ const OrderList: Component<OrderListPropts> = ({ orders }) => {
 }
 
 export default TradeTable
+

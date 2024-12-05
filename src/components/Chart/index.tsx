@@ -9,10 +9,28 @@ import {
 } from 'lightweight-charts'
 import { useErrorHandler } from '../../context/Error'
 
+/**
+ * Properties for the PriceLineChart component.
+ *
+ * @typedef {Object} PriceLineChartProps
+ * @property {LineData[]} data - The line data to be displayed in the chart.
+ */
 interface PriceLineChartProps {
     data: LineData[]
 }
 
+/**
+ * The PriceLineChart component.
+ *
+ * This component creates and manages a price line chart using the lightweight-charts library.
+ *
+ * @component
+ * @example
+ * <PriceLineChart data={[{ time: '2022-01-01', value: 100 }, { time: '2022-01-02', value: 110 }]} />
+ *
+ * @param {PriceLineChartProps} props - The properties for the component.
+ * @returns {JSX.Element} The rendered PriceLineChart component.
+ */
 const PriceLineChart: Component<PriceLineChartProps> = (props) => {
     const { setAppActivityLog } = useErrorHandler()
     let priceLines: IPriceLine[] = []

@@ -6,20 +6,34 @@ import {
     createEffect,
 } from 'solid-js'
 import { useFetchArray, useFetchObject } from '../../hooks/fetch'
-import { OrderBook, Quote } from '../interface'
+import { OrderBook, Quote, ChartItem, Depth } from '../interface'
 import { useErrorHandler } from '../Error'
-import { ChartItem, Depth } from '../interface/index'
 import { fetchQuotes } from './service'
 
+/**
+ * Interface representing the Network Context type.
+ *
+ * @typedef {Object} NetworkContextType
+ * @property {() => string} activePair - Function to get the current active pair.
+ * @property {(value: string) => void} setActivePair - Function to set a new active pair.
+ * @property {() => OrderBook[]} books - Function to get the list of order books.
+ * @property {() => boolean} booksLoading - Function to get the loading state of the order books.
+ * @property {(value: OrderBook[]) => void} setBooks - Function to set the order books.
+ * @property {() => ChartItem[]} charts - Function to get the list of chart items.
+ * @property {() => boolean} chartsLoading - Function to get the loading state of the charts.
+ * @property {(value: ChartItem[]) => void} setCharts - Function to set the chart items.
+ * @property {() => Quote[]} quotes - Function to get the list of quotes.
+ * @property {() => Depth} currentPairDepth - Function to get the depth of the current pair.
+ */
 interface NetworkContextType {
     activePair: () => string
     setActivePair: (value: string) => void
     books: () => OrderBook[]
     booksLoading: () => boolean
-    setBooks: (value: string) => void
+    setBooks: (value: OrderBook[]) => void
     charts: () => ChartItem[]
     chartsLoading: () => boolean
-    setCharts: (value: string) => void
+    setCharts: (value: ChartItem[]) => void
     quotes: () => Quote[]
     currentPairDepth: () => Depth
 }
@@ -35,6 +49,20 @@ const initialDepthData = {
 
 const NetworkContext = createContext<NetworkContextType | undefined>(undefined)
 
+/**
+ * The NetworkProvider component.
+ *
+ * This component provides network-related context to its children components.
+ *
+ * @component
+ * @example
+ * <NetworkProvider>
+ *   <YourComponent />
+ * </NetworkProvider>
+ *
+ * @param {Object} props - The properties for the component.
+ * @returns {JSX.Element} The rendered NetworkProvider component.
+ */
 export const NetworkProvider: ParentComponent = (props) => {
     const { setAppActivityLog } = useErrorHandler()
     const [activePair, setActivePair] = createSignal<string>('NTN-USDC')
@@ -58,13 +86,18 @@ export const NetworkProvider: ParentComponent = (props) => {
     // )
     // socketFeed.connect()
 
+    /**
+     * Update the active trading pair.
+     *
+     * @param {string} pair - The new active pair.
+     */
     const updateActivePair = (pair: string) => {
         setAppActivityLog(`Active pair changed to ${pair}`)
         setActivePair(pair)
     }
 
     /**
-     * Fetch depth if activepair changes
+     * Fetch depth if activePair changes.
      */
     createEffect(() => {
         if (activePair()) {
@@ -75,7 +108,7 @@ export const NetworkProvider: ParentComponent = (props) => {
     })
 
     /**
-     * Effect for handling state change on the chart fetcher
+     * Effect for handling state change on the chart fetcher.
      */
     createEffect(() => {
         if (chartsResponse.loading()) {
@@ -95,7 +128,7 @@ export const NetworkProvider: ParentComponent = (props) => {
     })
 
     /**
-     * An effect that that loops through the order books and gets the /quote for each pair
+     * An effect that loops through the order books and gets the /quote for each pair.
      */
     createEffect(async () => {
         const booksList = books()
@@ -111,7 +144,7 @@ export const NetworkProvider: ParentComponent = (props) => {
     })
 
     /**
-     * An effect for getting the depth of the active book
+     * An effect for getting the depth of the active book.
      */
     createEffect(() => {
         if (depth.loading()) {
@@ -123,7 +156,7 @@ export const NetworkProvider: ParentComponent = (props) => {
     })
 
     /**
-     * Effect for handling the state change on the ordebook fetcher
+     * Effect for handling the state change on the orderbook fetcher.
      */
     createEffect(() => {
         if (orderbooks.loading()) {
@@ -166,10 +199,17 @@ export const NetworkProvider: ParentComponent = (props) => {
     )
 }
 
+/**
+ * Custom hook to use the NetworkContext.
+ *
+ * @throws Will throw an error if used outside of a NetworkProvider.
+ * @returns {NetworkContextType} The network context value.
+ */
 export const useNetwork = (): NetworkContextType => {
     const context = useContext(NetworkContext)
     if (!context) {
-        throw new Error('useNetwork must be used within a UseNetworkProvider')
+        throw new Error('useNetwork must be used within a NetworkProvider')
     }
     return context
 }
+

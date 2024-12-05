@@ -5,6 +5,18 @@ import { useNetwork } from '../../context/Network'
 import { usePost } from '../../hooks/fetch'
 import useTradeSubmitter from '../../hooks/useTradeSubmitter'
 
+/**
+ * The Trade component.
+ *
+ * This component allows users to submit trade orders by specifying the amount, price, and side (buy/sell).
+ * It provides form inputs for the amount and price, buttons to select the side, and a checkbox for auto-updating the price and side.
+ *
+ * @component
+ * @example
+ * <Trade />
+ *
+ * @returns {JSX.Element} The rendered Trade component.
+ */
 const Trade: Component = () => {
     const { activePair } = useNetwork()
     const { submitTrade } = useTradeSubmitter()
@@ -27,6 +39,10 @@ const Trade: Component = () => {
     const [message, setMessage] = createSignal('')
     const [isAutoUpdate, setIsAutoUpdate] = createSignal(true)
     const [valid, setValid] = createSignal(true)
+
+    /**
+     * Clear the trade form inputs.
+     */
     const clear = () => {
         setTradeAmount('')
         setPrice('')
@@ -34,6 +50,11 @@ const Trade: Component = () => {
         setTradePrice('')
     }
 
+    /**
+     * Handle form submission.
+     *
+     * @param {Event} e - The form submit event.
+     */
     const handleSubmit = async (e: Event) => {
         e.preventDefault()
         if (!valid()) {
@@ -71,7 +92,7 @@ const Trade: Component = () => {
     })
 
     /**
-     * Amount is always manually input, so update the context
+     * Update the context with the trade amount.
      */
     createEffect(() => {
         if (tradeAmount()) {
@@ -80,7 +101,7 @@ const Trade: Component = () => {
     })
 
     /**
-     * Clear trade amount and price, and set the pair based on the active pair
+     * Clear trade amount and price, and set the pair based on the active pair.
      */
     createEffect(() => {
         const pair = activePair()
@@ -91,7 +112,7 @@ const Trade: Component = () => {
     })
 
     /**
-     * Auto update the trade price based on if auto update is true
+     * Auto update the trade price based on if auto update is true.
      */
     createEffect(() => {
         if (isAutoUpdate()) {
@@ -100,7 +121,7 @@ const Trade: Component = () => {
     })
 
     /**
-     * Auto update side based on if auto update is set
+     * Auto update side based on if auto update is set.
      */
     createEffect(() => {
         if (isAutoUpdate()) {
@@ -108,10 +129,18 @@ const Trade: Component = () => {
         }
     })
 
+    /**
+     * Get the CSS class for the trade side button based on its active state.
+     *
+     * @param {string} side - The trade side ('bid' or 'ask').
+     * @returns {string} The CSS class for the trade side button.
+     */
     const getSideStyle = (side: string) => {
         return `${styles.sideitem} ${side === tradeSide() ? styles.active : ''}`
     }
+
     console.log('valid?', valid())
+
     return (
         <form class={styles.wrapper} onSubmit={handleSubmit}>
             <div>
@@ -184,3 +213,4 @@ const Trade: Component = () => {
 }
 
 export default Trade
+
